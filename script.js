@@ -126,7 +126,7 @@ function createDots() {
       const size = Math.random() * 1 + 1; // Размер точки (1-2 пикселя)
       const color = colors[Math.floor(Math.random() * colors.length)];
       const angle = 75 * (Math.PI / 180); // Угол 75 градусов (фиксированный)
-      const speed = Math.random() * 1 + 1; // Скорость (1-2)
+      const speed = Math.random() * 1; // Скорость (1-2)
       const speedX = Math.cos(angle) * speed; // Скорость по X
       const speedY = Math.sin(angle) * speed; // Скорость по Y
       dots.push(new Dot(x, y, size, color, speedX, speedY));
@@ -149,7 +149,6 @@ window.addEventListener('resize', () => {
 // Запуск
 createDots();
 animateDots();
-
 
 createWord();
   onload = () => {
