@@ -100,10 +100,4 @@ body, html {
     .background-word {
         font-size: 1.2em; /* Уменьшаем размер слов */
     }
-
-    /* Уменьшаем размер букета для мобильных устройств */
-    #flowerCanvas, #sakuraCanvas {
-        width: 100%;
-        height: 100%;
-    }
 }

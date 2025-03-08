@@ -1049,8 +1049,12 @@ mask-image: linear-gradient(to top, transparent 40%, #079097 80%) !important;
 
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 768px) {
+  h1 {
+      font-size: 1.5em; /* Уменьшаем размер заголовка */
+  }
+
   .word {
-      font-size: 1.5em; /* Уменьшаем размер текста на мобильных устройствах */
+      font-size: 1.2em; /* Уменьшаем размер слов */
   }
 }
 
