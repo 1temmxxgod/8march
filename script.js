@@ -59,10 +59,14 @@ onload = () => {
           '#FFA07A', // Светло-коралловый
           '#FFC0CB'  // Розовый (светлый)
       ]; // Больше цветов для сердечек
-      for (let i = 0; i < 50; i++) {
+  
+      const isMobile = window.innerWidth <= 768; // Проверяем, мобильное ли устройство
+      const heartCount = isMobile ? 30 : 50; // Меньше сердечек на мобильных устройствах
+  
+      for (let i = 0; i < heartCount; i++) {
           const x = Math.random() * canvas.width; // Случайное положение по X
           const y = Math.random() * canvas.height; // Случайное положение по Y
-          const size = Math.random() * 30 + 20; // Случайный размер (от 20 до 50)
+          const size = isMobile ? Math.random() * 20 + 10 : Math.random() * 30 + 20; // Меньше размер на мобильных
           const color = colors[Math.floor(Math.random() * colors.length)]; // Случайный цвет
           const speed = Math.random() * 0.5 + 0.3; // Уменьшенная скорость (от 0.3 до 0.8)
           hearts.push(new Heart(x, y, size, color, speed));
@@ -136,6 +140,10 @@ onload = () => {
       const span = document.createElement('span');
       span.textContent = word;
       span.classList.add('word');
+  
+      // Уменьшаем размер слова на мобильных устройствах
+      const isMobile = window.innerWidth <= 768;
+      span.style.fontSize = isMobile ? '1.2em' : '2em';
   
       let x, y;
       do {

@@ -9,7 +9,7 @@
 
 :root {
     --dark-color: #000; 
-  --light-color: rgba(145, 233, 255, 0.2); /* Светлый цвет для градиентов */
+    --light-color: rgba(145, 233, 255, 0.1); /* Светлый цвет для градиентов */
         position: fixed;
         left: 50%;
         top: 0;
@@ -18,8 +18,8 @@
         height: 100%;
         filter: blur(0.1vmin);
         background-image: radial-gradient(ellipse at top, transparent 0%, var(--dark-color)), radial-gradient(ellipse at bottom, var(--dark-color), rgba(145, 233, 255, 0.2)), repeating-linear-gradient(220deg, black 0px, black 19px, transparent 19px, transparent 22px), repeating-linear-gradient(189deg, black 0px, black 19px, transparent 19px, transparent 22px), repeating-linear-gradient(148deg, black 0px, black 19px, transparent 19px, transparent 22px), linear-gradient(90deg, #00fffa, #f0f0f0);
-
-}
+      
+  }
 
 body {
     display: flex;
@@ -45,11 +45,11 @@ body {
     background-image:
       radial-gradient(ellipse at top, transparent 0%, var(--dark-color)),
       radial-gradient(ellipse at bottom, var(--dark-color), var(--light-color)),
-      repeating-linear-gradient(220deg, black 0px, black 19px, transparent 19px, transparent 22px),
-      repeating-linear-gradient(189deg, black 0px, black 19px, transparent 19px, transparent 22px),
-      repeating-linear-gradient(148deg, black 0px, black 19px, transparent 19px, transparent 22px),
-      linear-gradient(90deg, #00fffa, #f0f0f0);
-    animation: twinkle 3s infinite ease-in-out;
+      repeating-linear-gradient(220deg, rgba(0, 0, 0, 0.5) 0px, rgba(0, 0, 0, 0.5) 19px, transparent 19px, transparent 22px),
+      repeating-linear-gradient(189deg, rgba(0, 0, 0, 0.5) 0px, rgba(0, 0, 0, 0.5) 19px, transparent 19px, transparent 22px),
+      repeating-linear-gradient(148deg, rgba(0, 0, 0, 0.5) 0px, rgba(0, 0, 0, 0.5) 19px, transparent 19px, transparent 22px),
+      linear-gradient(90deg, rgba(0, 255, 250, 0.2), rgba(240, 240, 240, 0.2)); /* Уменьшаем яркость градиента */
+    animation: twinkle 5s infinite ease-in-out;
   }
   
   /* Анимация мерцания */
@@ -61,6 +61,7 @@ body {
       opacity: 0.8;
     }
   }
+
 
 * {
     margin: 0;
