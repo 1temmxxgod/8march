@@ -8,8 +8,33 @@
     <link rel="stylesheet" href="styles_code.css">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+      /* Стили для текста и картинки */
+      .text-image-container {
+          position: absolute;
+          top: 20%;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          align-items: center;
+          gap: 10px; /* Расстояние между текстом и картинкой */
+          opacity: 0; /* Начальная прозрачность */
+          z-index: 1000;
+      }
+
+      .text-overlay {
+          font-size: 3em;
+          color: #ffffff;
+          font-family: 'Montserrat', sans-serif;
+          text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
+      }
+
+      .image-overlay {
+          width: 50px; /* Размер картинки */
+          height: auto;
+      }
     </style>
     <link rel="icon" href="flowers.png" type="image/x-icon">
+
 </head>
 <body class="not-loaded">
     <div class="night"></div>
@@ -311,6 +336,7 @@
         </div>
       </div>
     </div>
+    <div id="text-container"></div>
     <canvas id="dotsCanvas"></canvas>
     <script src="script.js"></script>
 </body>

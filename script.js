@@ -1,5 +1,6 @@
 const dotsCanvas = document.getElementById('dotsCanvas');
 const dotsCtx = dotsCanvas.getContext('2d');
+const textContainer = document.getElementById('text-container');
 
 // Устанавливаем размеры Canvas
 dotsCanvas.width = window.innerWidth;
@@ -89,6 +90,38 @@ function animateDots() {
     requestAnimationFrame(animateDots); // Запускаем анимацию
 }
 
+// Функция для отображения текста и картинки
+function showTextAndImage() {
+    // Создаем контейнер для текста и картинки
+    const container = document.createElement('div');
+    container.classList.add('text-image-container');
+
+    // Создаем текст
+    const text = document.createElement('div');
+    text.textContent = 'С днем щавеля!';
+    text.classList.add('text-overlay');
+
+    // Создаем картинку
+    const image = document.createElement('img');
+    image.src = 'shav.png'; // Укажите путь к вашей картинке
+    image.classList.add('image-overlay');
+
+    // Добавляем текст и картинку в контейнер
+    container.appendChild(text);
+    container.appendChild(image);
+
+    // Добавляем контейнер в основной контейнер
+    textContainer.appendChild(container);
+
+    // Плавное появление текста и картинки
+    let opacity = 0;
+    const fadeInInterval = setInterval(() => {
+        opacity += 0.02;
+        container.style.opacity = opacity;
+        if (opacity >= 1) clearInterval(fadeInInterval);
+    }, 50);
+}
+
 // Обработчик изменения размера окна
 window.addEventListener('resize', () => {
     dotsCanvas.width = window.innerWidth;
@@ -100,6 +133,9 @@ setTimeout(() => {
     createDots();
     animateDots();
 }, 5000); // 5000 миллисекунд (5 секунд) - время, через которое начнется анимация точек
+
+// Показываем текст и картинку через 5 секунд после появления точек
+setTimeout(showTextAndImage, 5000);
 
 // Обработчик загрузки страницы
 window.onload = () => {
