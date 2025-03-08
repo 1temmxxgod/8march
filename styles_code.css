@@ -7,7 +7,8 @@
 }
 
 :root {
-  --dark-color: #000;
+  --dark-color: #000; 
+  --light-color: rgba(145, 233, 255, 0.2); /* Светлый цвет для градиентов */
       position: fixed;
       left: 50%;
       top: 0;
@@ -16,7 +17,7 @@
       height: 100%;
       filter: blur(0.1vmin);
       background-image: radial-gradient(ellipse at top, transparent 0%, var(--dark-color)), radial-gradient(ellipse at bottom, var(--dark-color), rgba(145, 233, 255, 0.2)), repeating-linear-gradient(220deg, black 0px, black 19px, transparent 19px, transparent 22px), repeating-linear-gradient(189deg, black 0px, black 19px, transparent 19px, transparent 22px), repeating-linear-gradient(148deg, black 0px, black 19px, transparent 19px, transparent 22px), linear-gradient(90deg, #00fffa, #f0f0f0);
-
+    
 }
 
 body {
@@ -29,6 +30,7 @@ body {
   perspective: 1000px;
 }
 
+
 .night {
   position: fixed;
   left: 50%;
@@ -37,8 +39,26 @@ body {
   width: 100%;
   height: 100%;
   filter: blur(0.1vmin);
-  background-image: radial-gradient(ellipse at top, transparent 0%, var(--dark-color)), radial-gradient(ellipse at bottom, var(--dark-color), rgba(145, 233, 255, 0.2)), repeating-linear-gradient(220deg, black 0px, black 19px, transparent 19px, transparent 22px), repeating-linear-gradient(189deg, black 0px, black 19px, transparent 19px, transparent 22px), repeating-linear-gradient(148deg, black 0px, black 19px, transparent 19px, transparent 22px), linear-gradient(90deg, #00fffa, #f0f0f0);
+  background-image:
+    radial-gradient(ellipse at top, transparent 0%, var(--dark-color)),
+    radial-gradient(ellipse at bottom, var(--dark-color), var(--light-color)),
+    repeating-linear-gradient(220deg, black 0px, black 19px, transparent 19px, transparent 22px),
+    repeating-linear-gradient(189deg, black 0px, black 19px, transparent 19px, transparent 22px),
+    repeating-linear-gradient(148deg, black 0px, black 19px, transparent 19px, transparent 22px),
+    linear-gradient(90deg, #00fffa, #f0f0f0);
+  animation: twinkle 3s infinite ease-in-out;
 }
+
+/* Анимация мерцания */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
 
 .flowers {
   position: relative;
@@ -1013,5 +1033,36 @@ mask-image: linear-gradient(to top, transparent 40%, #079097 80%) !important;
   #flowerCanvas, #sakuraCanvas {
       width: 100%;
       height: 100%;
+  }
+}
+
+/* Стили для Canvas */
+#heartsCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Стили для слов */
+.word {
+  position: absolute;
+  font-size: 2em;
+  color: white;
+  opacity: 0;
+  animation: fadeInOut 3s ease-in-out;
+  user-select: none;
+  pointer-events: none;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  10%, 90% {
+      opacity: 1;
+      transform: translateY(0);
   }
 }
