@@ -121,16 +121,16 @@ class Dot {
 function createDots() {
     const colors = ['#FCB4D5', '#FBA0E3', '#F19CBB']; // Цвета точек
     for (let i = 0; i < 100; i++) {
-        const x = Math.random() * dotsCanvas.width;
-        const y = Math.random() * dotsCanvas.height;
-        const size = Math.random() * 3 + 1; // Размер точки (1-4 пикселя)
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const angle = (35 + Math.random() * 5) * (Math.PI / 180); // Угол 35-40 градусов
-        const speed = Math.random() * 2 + 1; // Скорость (1-3)
-        const speedX = Math.cos(angle) * speed; // Скорость по X
-        const speedY = Math.sin(angle) * speed; // Скорость по Y
-        dots.push(new Dot(x, y, size, color, speedX, speedY));
-    }
+      const x = Math.random() * dotsCanvas.width;
+      const y = Math.random() * dotsCanvas.height;
+      const size = Math.random() * 3 + 1; // Размер точки (1-4 пикселя)
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const angle = 75 * (Math.PI / 180); // Угол 75 градусов (фиксированный)
+      const speed = Math.random() * 2 + 1; // Скорость (1-3)
+      const speedX = Math.cos(angle) * speed; // Скорость по X
+      const speedY = Math.sin(angle) * speed; // Скорость по Y
+      dots.push(new Dot(x, y, size, color, speedX, speedY));
+  }
 }
 
 // Анимация падающих точек
