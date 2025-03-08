@@ -92,6 +92,9 @@ class Dot {
         this.color = color;
         this.speedX = speedX;
         this.speedY = speedY;
+        this.opacity = 0; // Начальная прозрачность
+        this.fadeInDuration = 5000; // Длительность появления (5 секунд)
+        this.startTime = Date.now(); // Время создания точки
     }
 
     // Метод для отрисовки точки
@@ -99,11 +102,30 @@ class Dot {
         dotsCtx.beginPath();
         dotsCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         dotsCtx.fillStyle = this.color;
+
+        // Добавляем свечение
+        dotsCtx.shadowBlur = 15; // Размытие тени
+        dotsCtx.shadowColor = this.color; // Цвет свечения (такой же, как у точки)
+
+        // Устанавливаем прозрачность
+        dotsCtx.globalAlpha = this.opacity;
+
         dotsCtx.fill();
     }
 
-    // Метод для обновления позиции точки
+    // Метод для обновления позиции и прозрачности точки
     update() {
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - this.startTime;
+
+        // Плавное появление точки
+        if (elapsedTime < this.fadeInDuration) {
+            this.opacity = elapsedTime / this.fadeInDuration; // Плавное увеличение прозрачности
+        } else {
+            this.opacity = 1; // Полная непрозрачность
+        }
+
+        // Движение точки
         this.x += this.speedX;
         this.y += this.speedY;
 
@@ -111,6 +133,8 @@ class Dot {
         if (this.y > dotsCanvas.height || this.x > dotsCanvas.width || this.x < 0) {
             this.x = Math.random() * dotsCanvas.width;
             this.y = -this.size;
+            this.opacity = 0; // Сбрасываем прозрачность
+            this.startTime = Date.now(); // Сбрасываем время создания
         }
 
         this.draw();
@@ -121,16 +145,16 @@ class Dot {
 function createDots() {
     const colors = ['#FCB4D5', '#FBA0E3', '#F19CBB']; // Цвета точек
     for (let i = 0; i < 100; i++) {
-      const x = Math.random() * dotsCanvas.width;
-      const y = Math.random() * dotsCanvas.height;
-      const size = Math.random() * 1 + 1; // Размер точки (1-2 пикселя)
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      const angle = 75 * (Math.PI / 180); // Угол 75 градусов (фиксированный)
-      const speed = Math.random() * 0.6; // Скорость (1-2)
-      const speedX = Math.cos(angle) * speed; // Скорость по X
-      const speedY = Math.sin(angle) * speed; // Скорость по Y
-      dots.push(new Dot(x, y, size, color, speedX, speedY));
-  }
+        const x = Math.random() * dotsCanvas.width;
+        const y = Math.random() * dotsCanvas.height;
+        const size = Math.random() * 1 + 1; // Размер точки (1-2 пикселя)
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const angle = 75 * (Math.PI / 180); // Угол 75 градусов (фиксированный)
+        const speed = Math.random() * 0.3 + 0.2; // Замедленная скорость (0.2-0.5)
+        const speedX = Math.cos(angle) * speed; // Скорость по X
+        const speedY = Math.sin(angle) * speed; // Скорость по Y
+        dots.push(new Dot(x, y, size, color, speedX, speedY));
+    }
 }
 
 // Анимация падающих точек
