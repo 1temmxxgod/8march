@@ -1,84 +1,9 @@
-const wordsContainer = document.getElementById('words-container');
 const dotsCanvas = document.getElementById('dotsCanvas');
 const dotsCtx = dotsCanvas.getContext('2d');
 
 // Устанавливаем размеры Canvas
 dotsCanvas.width = window.innerWidth;
 dotsCanvas.height = window.innerHeight;
-
-// Список приятных слов
-const words = [
-    "Счастья", "Любви", "Улыбок", "Радости", "Вдохновения", 
-    "Тепла", "Добра", "Уюта", "Мечты", "Успеха", 
-    "Красоты", "Гармонии", "Света", "Надежды", "Чудес",
-    "Нежности", "Солнца", "Удачи", "Смеха", "Света"
-];
-
-// Массив для хранения активных слов
-let activeWords = [];
-
-// Функция для получения случайного слова
-function getRandomWord() {
-    let word;
-    do {
-        word = words[Math.floor(Math.random() * words.length)];
-    } while (activeWords.includes(word)); // Проверяем, чтобы слово не дублировалось
-    activeWords.push(word); // Добавляем слово в активные
-    return word;
-}
-
-// Функция для получения случайной позиции
-function getRandomPosition() {
-    const x = Math.random() * window.innerWidth;
-    const y = Math.random() * window.innerHeight;
-    return { x, y };
-}
-
-// Функция для получения случайного направления
-function getRandomDirection() {
-    const angle = Math.random() * Math.PI * 2; // Случайный угол (0-360 градусов)
-    const distance = Math.random() * 200 + 100; // Случайное расстояние (100-300 пикселей)
-    const moveX = Math.cos(angle) * distance; // Смещение по X
-    const moveY = Math.sin(angle) * distance; // Смещение по Y
-    return { moveX, moveY };
-}
-
-// Функция для создания и анимации слова
-function createWord() {
-    const word = getRandomWord();
-    const span = document.createElement('span');
-    span.textContent = word;
-    span.classList.add('word');
-
-    // Уменьшаем размер слова на мобильных устройствах
-    const isMobile = window.innerWidth <= 768;
-    span.style.fontSize = isMobile ? '1.5em' : '2em';
-
-    // Устанавливаем начальную позицию в случайном месте
-    const { x, y } = getRandomPosition();
-    span.style.left = `${x}px`;
-    span.style.top = `${y}px`;
-
-    // Устанавливаем направление движения
-    const { moveX, moveY } = getRandomDirection();
-    span.style.setProperty('--move-x', `${moveX}px`);
-    span.style.setProperty('--move-y', `${moveY}px`);
-
-    // Добавляем слово в контейнер
-    wordsContainer.appendChild(span);
-
-    // Удаляем слово после завершения анимации
-    setTimeout(() => {
-        span.remove();
-        activeWords = activeWords.filter(activeWord => activeWord !== word); // Убираем слово из активных
-    }, 5000); // 5 секунд (длительность анимации)
-}
-
-// Запускаем создание нового слова каждые 2 секунды
-setInterval(createWord, 2000);
-
-// Создаем первое слово сразу
-createWord();
 
 // Массив для хранения точек
 const dots = [];
@@ -104,7 +29,7 @@ class Dot {
         dotsCtx.fillStyle = this.color;
 
         // Добавляем свечение
-        dotsCtx.shadowBlur = 15; // Размытие тени
+        dotsCtx.shadowBlur = 50; // Увеличиваем размытие тени для большего свечения
         dotsCtx.shadowColor = this.color; // Цвет свечения (такой же, как у точки)
 
         // Устанавливаем прозрачность
@@ -143,11 +68,11 @@ class Dot {
 
 // Создаем точки
 function createDots() {
-    const colors = ['#FCB4D5', '#FBA0E3', '#F19CBB']; // Цвета точек
-    for (let i = 0; i < 100; i++) {
+    const colors = ['#FCB4D5', '#FBA0E3', '#F19CBB']; // Яркие цвета для точек
+    for (let i = 0; i < 50; i++) { // Уменьшено количество точек до 50
         const x = Math.random() * dotsCanvas.width;
         const y = Math.random() * dotsCanvas.height;
-        const size = Math.random() * 1 + 1; // Размер точки (1-2 пикселя)
+        const size = Math.random() * 2 + 1; // Размер точки (1-3 пикселя)
         const color = colors[Math.floor(Math.random() * colors.length)];
         const angle = 75 * (Math.PI / 180); // Угол 75 градусов (фиксированный)
         const speed = Math.random() * 0.3 + 0.2; // Замедленная скорость (0.2-0.5)
@@ -174,10 +99,10 @@ window.addEventListener('resize', () => {
 createDots();
 animateDots();
 
-createWord();
-  onload = () => {
+// Обработчик загрузки страницы
+window.onload = () => {
     const c = setTimeout(() => {
-      document.body.classList.remove("not-loaded");
-      clearTimeout(c);
+        document.body.classList.remove("not-loaded");
+        clearTimeout(c);
     }, 1000);
-  };
+};
