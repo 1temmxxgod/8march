@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="styles_code.css">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-      /* Стили для текста и картинки */
-      .text-image-container {
+       /* Стили для текста и картинки */
+       .text-image-container {
           position: absolute;
           top: 20%;
           left: 50%;
@@ -31,6 +31,21 @@
       .image-overlay {
           width: 50px; /* Размер картинки */
           height: auto;
+      }
+
+      /* Адаптация для мобильных устройств */
+      @media (max-width: 768px) {
+          .text-overlay {
+              font-size: 2em; /* Уменьшаем размер текста для мобильных устройств */
+          }
+
+          .image-overlay {
+              width: 30px; /* Уменьшаем размер картинки для мобильных устройств */
+          }
+
+          .text-image-container {
+              top: 15%; /* Сдвигаем контейнер выше для мобильных устройств */
+          }
       }
     </style>
     <link rel="icon" href="flowers.png" type="image/x-icon">
