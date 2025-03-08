@@ -28,6 +28,10 @@ body {
   background-color: var(--dark-color);
   overflow: hidden;
   perspective: 1000px;
+  font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
 }
 
 
@@ -39,24 +43,6 @@ body {
   width: 100%;
   height: 100%;
   filter: blur(0.1vmin);
-  background-image:
-    radial-gradient(ellipse at top, transparent 0%, var(--dark-color)),
-    radial-gradient(ellipse at bottom, var(--dark-color), var(--light-color)),
-    repeating-linear-gradient(220deg, rgba(0, 0, 0, 0.5) 0px, rgba(0, 0, 0, 0.5) 19px, transparent 19px, transparent 22px),
-    repeating-linear-gradient(189deg, rgba(0, 0, 0, 0.5) 0px, rgba(0, 0, 0, 0.5) 19px, transparent 19px, transparent 22px),
-    repeating-linear-gradient(148deg, rgba(0, 0, 0, 0.5) 0px, rgba(0, 0, 0, 0.5) 19px, transparent 19px, transparent 22px),
-    linear-gradient(90deg, rgba(0, 255, 250, 0.2), rgba(240, 240, 240, 0.2)); /* Уменьшаем яркость градиента */
-  animation: twinkle 5s infinite ease-in-out;
-}
-
-/* Анимация мерцания */
-@keyframes twinkle {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
 }
 
 
@@ -1036,44 +1022,39 @@ mask-image: linear-gradient(to top, transparent 40%, #079097 80%) !important;
   }
 }
 
-/* Стили для Canvas */
-#heartsCanvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
 /* Стили для слов */
 .word {
   position: absolute;
   font-size: 2em;
   color: white;
   opacity: 0;
-  animation: fadeInOut 3s ease-in-out;
+  animation: float 5s ease-in-out forwards;
   user-select: none;
   pointer-events: none;
 }
 
-@keyframes fadeInOut {
-  0%, 100% {
+/* Анимация плавного появления и улетания */
+@keyframes float {
+  0% {
       opacity: 0;
-      transform: translateY(-20px);
+      transform: translate(0, 0) scale(0.5);
   }
-  10%, 90% {
+  10% {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate(0, 0) scale(1);
+  }
+  90% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+      transform: translate(var(--move-x), var(--move-y)) scale(0.5);
   }
 }
 
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 768px) {
-  h1 {
-      font-size: 1.5em; /* Уменьшаем размер заголовка */
-  }
-
   .word {
-      font-size: 1.2em; /* Уменьшаем размер слов */
+      font-size: 1.5em; /* Уменьшаем размер текста на мобильных устройствах */
   }
 }
