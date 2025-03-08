@@ -1,11 +1,17 @@
 const wordsContainer = document.getElementById('words-container');
+const dotsCanvas = document.getElementById('dotsCanvas');
+const dotsCtx = dotsCanvas.getContext('2d');
+
+// Устанавливаем размеры Canvas
+dotsCanvas.width = window.innerWidth;
+dotsCanvas.height = window.innerHeight;
 
 // Список приятных слов
 const words = [
     "Счастья", "Любви", "Улыбок", "Радости", "Вдохновения", 
     "Тепла", "Добра", "Уюта", "Мечты", "Успеха", 
     "Красоты", "Гармонии", "Света", "Надежды", "Чудес",
-    "Нежности", "Солнца", "Удачи", "Смеха"
+    "Нежности", "Солнца", "Удачи", "Смеха", "Света"
 ];
 
 // Массив для хранения активных слов
@@ -48,7 +54,7 @@ function createWord() {
     const isMobile = window.innerWidth <= 768;
     span.style.fontSize = isMobile ? '1.5em' : '2em';
 
-    // Устанавливаем начальную позицию
+    // Устанавливаем начальную позицию в случайном месте
     const { x, y } = getRandomPosition();
     span.style.left = `${x}px`;
     span.style.top = `${y}px`;
@@ -72,6 +78,79 @@ function createWord() {
 setInterval(createWord, 2000);
 
 // Создаем первое слово сразу
+createWord();
+
+// Массив для хранения точек
+const dots = [];
+
+// Класс для создания точек
+class Dot {
+    constructor(x, y, size, color, speedX, speedY) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.color = color;
+        this.speedX = speedX;
+        this.speedY = speedY;
+    }
+
+    // Метод для отрисовки точки
+    draw() {
+        dotsCtx.beginPath();
+        dotsCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        dotsCtx.fillStyle = this.color;
+        dotsCtx.fill();
+    }
+
+    // Метод для обновления позиции точки
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Если точка вышла за пределы экрана, возвращаем ее в начало
+        if (this.y > dotsCanvas.height || this.x > dotsCanvas.width || this.x < 0) {
+            this.x = Math.random() * dotsCanvas.width;
+            this.y = -this.size;
+        }
+
+        this.draw();
+    }
+}
+
+// Создаем точки
+function createDots() {
+    const colors = ['#FCB4D5', '#FBA0E3', '#F19CBB']; // Цвета точек
+    for (let i = 0; i < 100; i++) {
+        const x = Math.random() * dotsCanvas.width;
+        const y = Math.random() * dotsCanvas.height;
+        const size = Math.random() * 3 + 1; // Размер точки (1-4 пикселя)
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const angle = (35 + Math.random() * 5) * (Math.PI / 180); // Угол 35-40 градусов
+        const speed = Math.random() * 2 + 1; // Скорость (1-3)
+        const speedX = Math.cos(angle) * speed; // Скорость по X
+        const speedY = Math.sin(angle) * speed; // Скорость по Y
+        dots.push(new Dot(x, y, size, color, speedX, speedY));
+    }
+}
+
+// Анимация падающих точек
+function animateDots() {
+    dotsCtx.clearRect(0, 0, dotsCanvas.width, dotsCanvas.height); // Очищаем Canvas
+    dots.forEach(dot => dot.update()); // Обновляем и рисуем каждую точку
+    requestAnimationFrame(animateDots); // Запускаем анимацию
+}
+
+// Обработчик изменения размера окна
+window.addEventListener('resize', () => {
+    dotsCanvas.width = window.innerWidth;
+    dotsCanvas.height = window.innerHeight;
+});
+
+// Запуск
+createDots();
+animateDots();
+
+
 createWord();
   onload = () => {
     const c = setTimeout(() => {

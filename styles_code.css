@@ -1014,12 +1014,6 @@ mask-image: linear-gradient(to top, transparent 40%, #079097 80%) !important;
   .background-word {
       font-size: 1.2em; /* Уменьшаем размер слов */
   }
-
-  /* Уменьшаем размер букета для мобильных устройств */
-  #flowerCanvas, #sakuraCanvas {
-      width: 100%;
-      height: 100%;
-  }
 }
 
 /* Стили для слов */
@@ -1031,6 +1025,7 @@ mask-image: linear-gradient(to top, transparent 40%, #079097 80%) !important;
   animation: float 5s ease-in-out forwards;
   user-select: none;
   pointer-events: none;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6); /* Свечение текста */
 }
 
 /* Анимация плавного появления и улетания */
@@ -1039,11 +1034,11 @@ mask-image: linear-gradient(to top, transparent 40%, #079097 80%) !important;
       opacity: 0;
       transform: translate(0, 0) scale(0.5);
   }
-  10% {
+  20% {
       opacity: 1;
       transform: translate(0, 0) scale(1);
   }
-  90% {
+  80% {
       opacity: 1;
   }
   100% {
@@ -1057,4 +1052,13 @@ mask-image: linear-gradient(to top, transparent 40%, #079097 80%) !important;
   .word {
       font-size: 1.5em; /* Уменьшаем размер текста на мобильных устройствах */
   }
+}
+
+/* Стили для Canvas */
+#dotsCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 2; /* Точки поверх всех объектов */
 }
