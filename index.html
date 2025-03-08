@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>С 8 марта!</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="flowers.png" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <div class="overlay" id="overlay">
+            <p>Нажми на экран</p>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById("overlay").addEventListener("click", function() {
+            this.style.opacity = "0";
+            setTimeout(() => {
+                window.location.href = "code.html";
+            }, 500);
+        });
+    </script>
+</body>
+</html>
