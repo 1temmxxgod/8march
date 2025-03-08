@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="styles_code.css">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-       /* Стили для текста и картинки */
-       .text-image-container {
+      /* Стили для текста и картинки */
+      .text-image-container {
           position: absolute;
           top: 20%;
           left: 50%;
@@ -19,6 +19,7 @@
           gap: 10px; /* Расстояние между текстом и картинкой */
           opacity: 0; /* Начальная прозрачность */
           z-index: 1000;
+          white-space: nowrap; /* Запрет переноса текста на новую строку */
       }
 
       .text-overlay {
@@ -26,6 +27,7 @@
           color: #ffffff;
           font-family: 'Montserrat', sans-serif;
           text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
+          white-space: nowrap; /* Запрет переноса текста на новую строку */
       }
 
       .image-overlay {
@@ -36,7 +38,7 @@
       /* Адаптация для мобильных устройств */
       @media (max-width: 768px) {
           .text-overlay {
-              font-size: 2em; /* Уменьшаем размер текста для мобильных устройств */
+              font-size: 1.5em; /* Уменьшаем размер текста для мобильных устройств */
           }
 
           .image-overlay {
@@ -45,6 +47,7 @@
 
           .text-image-container {
               top: 15%; /* Сдвигаем контейнер выше для мобильных устройств */
+              gap: 5px; /* Уменьшаем расстояние между текстом и картинкой */
           }
       }
     </style>
