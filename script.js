@@ -69,7 +69,7 @@ class Dot {
 // Создаем точки
 function createDots() {
     const colors = ['#FCB4D5', '#FBA0E3', '#F19CBB']; // Яркие цвета для точек
-    for (let i = 0; i < 50; i++) { // Уменьшено количество точек до 50
+    for (let i = 0; i < 40; i++) { // Уменьшено количество точек до 50
         const x = Math.random() * dotsCanvas.width;
         const y = Math.random() * dotsCanvas.height;
         const size = Math.random() * 2 + 1; // Размер точки (1-3 пикселя)
@@ -95,9 +95,11 @@ window.addEventListener('resize', () => {
     dotsCanvas.height = window.innerHeight;
 });
 
-// Запуск
-createDots();
-animateDots();
+// Задержка перед созданием точек и их анимацией
+setTimeout(() => {
+    createDots();
+    animateDots();
+}, 5000); // 5000 миллисекунд (5 секунд) - время, через которое начнется анимация точек
 
 // Обработчик загрузки страницы
 window.onload = () => {
